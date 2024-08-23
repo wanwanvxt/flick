@@ -86,9 +86,9 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     return reply
   })
 
-  /** /genre?query={genre}&page={page} */
+  /** /genre?genre={genre}&page={page} */
   fastify.get('/genre', async (request, reply) => {
-    const genre = decodeURIComponent((request.query as { query: string }).query)
+    const genre = decodeURIComponent((request.query as { genre: string }).genre)
     const page = (request.query as { page: number }).page || 1
 
     movieProvider
