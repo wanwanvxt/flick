@@ -42,42 +42,46 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     return reply
   })
 
-  /** /recent-movies */
-  fastify.get('/recent-movies', async (request, reply) => {
-    movieProvider
-      .fetchRecentMovies()
-      .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
-      .catch((err) => reply.code(500).send(err))
+  /** /recent */
+  fastify.get('/recent', async (request, reply) => {
+    const type = (request.query as { type: string }).type
+    if (type != 'movie' && type != 'tvshow') {
+      reply.code(400).send()
+    }
+
+    if (type == 'movie') {
+      movieProvider
+        .fetchRecentMovies()
+        .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
+        .catch((err) => reply.code(500).send(err))
+    } else if (type == 'tvshow') {
+      movieProvider
+        .fetchRecentTvShows()
+        .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
+        .catch((err) => reply.code(500).send(err))
+    }
 
     return reply
   })
 
-  /** /recent-tvshows */
-  fastify.get('/recent-tvshows', async (request, reply) => {
-    movieProvider
-      .fetchRecentTvShows()
-      .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
-      .catch((err) => reply.code(500).send(err))
+  /** /trending */
+  fastify.get('/trending', async (request, reply) => {
+    const type = (request.query as { type: string }).type
+    if (type != 'movie' && type != 'tvshow') {
+      reply.code(400).send()
+    }
 
-    return reply
-  })
-
-  /** /trending-movies */
-  fastify.get('/trending-movies', async (request, reply) => {
-    movieProvider
-      .fetchTrendingMovies()
-      .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
-      .catch((err) => reply.code(500).send(err))
-
-    return reply
-  })
-
-  /** /trending-tvshows */
-  fastify.get('/trending-tvshows', async (request, reply) => {
-    movieProvider
-      .fetchTrendingTvShows()
-      .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
-      .catch((err) => reply.code(500).send(err))
+    if (type == 'movie') {
+      movieProvider
+        .fetchTrendingMovies()
+        .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
+        .catch((err) => reply.code(500).send(err))
+    } else if (type == 'tvshow') {
+      movieProvider
+        .fetchTrendingTvShows()
+        .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
+        .catch((err) => reply.code(500).send(err))
+    }
 
     return reply
   })
