@@ -176,7 +176,7 @@ A movies and TV shows player application
 
 6. Search by genre
 ```
-<base_url>/genre?query={query}
+<base_url>/genre?genre={genre}
 ```
 >example result:
 ```js
