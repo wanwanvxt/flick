@@ -100,8 +100,7 @@ A movies and TV shows player application
 
 4. Recent movies/TV shows
 ```
-<base_url>/recent-movies
-<base_url>/recent-tvshows
+<base_url>/recent?type={type}
 ```
 >example result:
 ```js
@@ -139,8 +138,7 @@ A movies and TV shows player application
 
 5. Trending movies/TV shows
 ```
-<base_url>/trending-movies
-<base_url>/trending-tvshows
+<base_url>/trending?type={type}
 ```
 >example result:
 ```js
