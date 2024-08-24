@@ -9,6 +9,11 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     const query = decodeURIComponent((request.query as { query: string }).query)
     const page = (request.query as { page: number }).page || 1
 
+    if (!query || !page) {
+      reply.code(400).send()
+      return reply
+    }
+
     movieProvider
       .search(query, page)
       .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
@@ -20,6 +25,11 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
   /** /info?id={id} */
   fastify.get('/info', async (request, reply) => {
     const mediaID = (request.query as { id: string }).id
+
+    if (!mediaID) {
+      reply.code(400).send()
+      return reply
+    }
 
     movieProvider
       .fetchMediaInfo(mediaID)
@@ -34,6 +44,11 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     const mediaID = (request.query as { mediaID: string }).mediaID
     const episodeID = (request.query as { episodeID: string }).episodeID
 
+    if (!mediaID || !episodeID) {
+      reply.code(400).send()
+      return reply
+    }
+
     movieProvider
       .fetchEpisodeSources(episodeID, mediaID)
       .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
@@ -45,20 +60,25 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
   /** /recent */
   fastify.get('/recent', async (request, reply) => {
     const type = (request.query as { type: string }).type
-    if (type != 'movie' && type != 'tvshow') {
-      reply.code(400).send()
-    }
 
-    if (type == 'movie') {
-      movieProvider
-        .fetchRecentMovies()
-        .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
-        .catch((err) => reply.code(500).send(err))
-    } else if (type == 'tvshow') {
-      movieProvider
-        .fetchRecentTvShows()
-        .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
-        .catch((err) => reply.code(500).send(err))
+    switch (type) {
+      case 'movie':
+        movieProvider
+          .fetchRecentMovies()
+          .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
+          .catch((err) => reply.code(500).send(err))
+        break
+
+      case 'tvshow':
+        movieProvider
+          .fetchRecentTvShows()
+          .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
+          .catch((err) => reply.code(500).send(err))
+        break
+
+      default:
+        reply.code(400).send()
+        break
     }
 
     return reply
@@ -67,20 +87,25 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
   /** /trending */
   fastify.get('/trending', async (request, reply) => {
     const type = (request.query as { type: string }).type
-    if (type != 'movie' && type != 'tvshow') {
-      reply.code(400).send()
-    }
 
-    if (type == 'movie') {
-      movieProvider
-        .fetchTrendingMovies()
-        .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
-        .catch((err) => reply.code(500).send(err))
-    } else if (type == 'tvshow') {
-      movieProvider
-        .fetchTrendingTvShows()
-        .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
-        .catch((err) => reply.code(500).send(err))
+    switch (type) {
+      case 'movie':
+        movieProvider
+          .fetchTrendingMovies()
+          .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
+          .catch((err) => reply.code(500).send(err))
+        break
+
+      case 'tvshow':
+        movieProvider
+          .fetchTrendingTvShows()
+          .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
+          .catch((err) => reply.code(500).send(err))
+        break
+
+      default:
+        reply.code(400).send()
+        break
     }
 
     return reply
@@ -90,6 +115,11 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
   fastify.get('/genre', async (request, reply) => {
     const genre = decodeURIComponent((request.query as { genre: string }).genre)
     const page = (request.query as { page: number }).page || 1
+
+    if (!genre || !page) {
+      reply.code(400).send()
+      return reply
+    }
 
     movieProvider
       .fetchByGenre(genre, page)
