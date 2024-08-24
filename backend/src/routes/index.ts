@@ -9,7 +9,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     const query = decodeURIComponent((request.query as { query: string }).query)
     const page = (request.query as { page: number }).page || 1
 
-    if (!query || !page) {
+    if (!query || typeof page !== 'number') {
       reply.code(400).send()
       return reply
     }
@@ -116,7 +116,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     const genre = decodeURIComponent((request.query as { genre: string }).genre)
     const page = (request.query as { page: number }).page || 1
 
-    if (!genre || !page) {
+    if (!genre || typeof page !== 'number') {
       reply.code(400).send()
       return reply
     }
