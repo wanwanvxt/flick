@@ -19,8 +19,3 @@ const start = async () => {
   }
 }
 start()
-
-export default async (request: any, reply: any) => {
-  await fastify.ready();
-  fastify.server.emit('request', request, reply);
-};
