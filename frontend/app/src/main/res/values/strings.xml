@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Flick</string>
+  <string name="bottom_nav_home">Home</string>
+  <string name="bottom_nav_search">Search</string>
+  <string name="bottom_nav_bookmarks">Bookmarks</string>
+  <string name="heading_trending">Trending now</string>
+  <string name="heading_recent_tvshows">Top TV shows recently</string>
+  <string name="heading_recent_movies">Top movies recently</string>
+  <string name="heading_your_bookmarks">Your bookmarks</string>
+  <string name="searchbar_hint">Search for movies &amp; TV shows</string>
+  <string name="bookmarks_oops1">Oops, you don\'t have any bookmarks.</string>
+  <string name="bookmarks_oops2">Let\'s search more~</string>
+  <string name="button_back_to_home">Back to Home</string>
+  <string name="button_watch">Watch</string>
+  <string name="button_bookmark_add">Add to bookmarks</string>
+  <string name="button_bookmark_added">Remove from bookmarks</string>
+</resources>

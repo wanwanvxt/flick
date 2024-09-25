@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".views.MovieInfoActivity">
+
+  <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+          android:id="@+id/imageMovie"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:maxHeight="@dimen/movie_image_max_height"
+          android:minHeight="@dimen/movie_image_min_height"
+          android:scaleType="centerCrop"
+          android:src="@drawable/img_movie_placeholder"
+          android:tintMode="multiply"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:tint="?attr/colorOnSurfaceInverse" />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@drawable/bg_gradient"
+          android:orientation="horizontal"
+          android:paddingStart="@dimen/horizontal_space1"
+          android:paddingEnd="@dimen/horizontal_space1"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent">
+
+          <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonBookmark"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/button_bookmark_add"
+            app:cornerRadius="@dimen/corner_radius1"
+            app:icon="@drawable/ic_round_bookmark_add_24"
+            app:iconSize="@dimen/icon_size" />
+
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonWatch"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_watch"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/corner_radius1"
+            app:icon="@drawable/ic_round_play_arrow_24"
+            app:iconPadding="@dimen/drawable_space"
+            app:iconSize="@dimen/icon_size" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+          style="?attr/materialCardViewElevatedStyle"
+          android:layout_width="@dimen/movie_card_view_width"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/horizontal_space1"
+          app:cardCornerRadius="@dimen/corner_radius1"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent">
+
+          <ImageView
+            android:id="@+id/imageMovie2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/movie_card_view_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_movie_placeholder" />
+        </com.google.android.material.card.MaterialCardView>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+          android:id="@+id/progressFetchingInfo"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/progress_horizontal_space"
+          android:layout_marginBottom="@dimen/progress_horizontal_space"
+          android:indeterminate="true"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:visibility="gone" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <LinearLayout
+        android:id="@+id/layoutMovieInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/labelName"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingStart="@dimen/horizontal_space1"
+          android:paddingTop="0dp"
+          android:paddingEnd="@dimen/horizontal_space1"
+          android:paddingBottom="0dp"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+          android:textStyle="bold"
+          tools:text="Vincenzo" />
+
+        <TextView
+          android:id="@+id/labelOverview"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingStart="@dimen/horizontal_space1"
+          android:paddingTop="@dimen/vertical_space3"
+          android:paddingEnd="@dimen/horizontal_space1"
+          android:paddingBottom="@dimen/vertical_space3"
+          app:drawableStartCompat="@drawable/ic_round_star_16"
+          app:drawableTint="@android:color/holo_orange_light"
+          tools:text="8.4 | 60min | 2021-02-20" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recyclerViewMovieGenres"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingStart="@dimen/horizontal_space1"
+          android:paddingTop="@dimen/vertical_space3"
+          android:paddingEnd="@dimen/horizontal_space1"
+          android:paddingBottom="@dimen/vertical_space3" />
+
+        <TextView
+          android:id="@+id/labelCasts"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingStart="@dimen/horizontal_space1"
+          android:paddingTop="@dimen/vertical_space3"
+          android:paddingEnd="@dimen/horizontal_space1"
+          android:paddingBottom="@dimen/vertical_space3"
+          tools:text="Casts: Kwak Dong-yeon, Kim Yeo-jin" />
+
+        <TextView
+          android:id="@+id/labelProduction"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingStart="@dimen/horizontal_space1"
+          android:paddingTop="@dimen/vertical_space3"
+          android:paddingEnd="@dimen/horizontal_space1"
+          android:paddingBottom="@dimen/vertical_space3"
+          tools:text="Production: Studio Dragon" />
+
+        <TextView
+          android:id="@+id/labelDescription"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingStart="@dimen/horizontal_space1"
+          android:paddingTop="@dimen/vertical_space3"
+          android:paddingEnd="@dimen/horizontal_space1"
+          android:paddingBottom="@dimen/vertical_space3"
+          tools:text="Description: Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+      </LinearLayout>
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

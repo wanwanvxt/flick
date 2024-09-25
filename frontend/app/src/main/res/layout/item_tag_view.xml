@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:background="@drawable/tag_round_border"
+  android:paddingStart="@dimen/horizontal_space2"
+  android:paddingTop="@dimen/vertical_space3"
+  android:paddingEnd="@dimen/horizontal_space2"
+  android:paddingBottom="@dimen/vertical_space3">
+
+  <TextView
+    android:id="@+id/labelTag"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textStyle="italic"
+    tools:text="Drama" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

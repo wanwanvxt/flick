@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fillViewport="true"
+  tools:context=".views.fragments.HomeFragment">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--region trending-->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/horizontal_space1"
+        android:paddingTop="@dimen/vertical_space2"
+        android:paddingEnd="@dimen/horizontal_space1"
+        android:paddingBottom="@dimen/vertical_space2"
+        android:text="@string/heading_trending"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+          android:id="@+id/progressFetchingTrending"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/progress_horizontal_space"
+          android:layout_marginBottom="@dimen/progress_horizontal_space"
+          android:indeterminate="true"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTrending"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/horizontal_space3"
+        android:paddingTop="@dimen/vertical_space3"
+        android:paddingEnd="@dimen/horizontal_space3"
+        android:paddingBottom="@dimen/vertical_space3"
+        tools:visibility="gone" />
+    </LinearLayout>
+    <!--endregion-->
+
+    <!--region recent TV shows-->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/horizontal_space1"
+        android:paddingTop="@dimen/vertical_space2"
+        android:paddingEnd="@dimen/horizontal_space1"
+        android:paddingBottom="@dimen/vertical_space2"
+        android:text="@string/heading_recent_tvshows"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+          android:id="@+id/progressFetchingRecentTVShows"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/progress_horizontal_space"
+          android:layout_marginBottom="@dimen/progress_horizontal_space"
+          android:indeterminate="true"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRecentTVShows"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/horizontal_space3"
+        android:paddingTop="@dimen/vertical_space3"
+        android:paddingEnd="@dimen/horizontal_space3"
+        android:paddingBottom="@dimen/vertical_space3"
+        tools:visibility="gone" />
+    </LinearLayout>
+    <!--endregion-->
+
+    <!--region recent movies-->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/horizontal_space1"
+        android:paddingTop="@dimen/vertical_space2"
+        android:paddingEnd="@dimen/horizontal_space1"
+        android:paddingBottom="@dimen/vertical_space2"
+        android:text="@string/heading_recent_movies"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+          android:id="@+id/progressFetchingRecentMovies"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/progress_horizontal_space"
+          android:layout_marginBottom="@dimen/progress_horizontal_space"
+          android:indeterminate="true"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRecentMovies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/horizontal_space3"
+        android:paddingTop="@dimen/vertical_space3"
+        android:paddingEnd="@dimen/horizontal_space3"
+        android:paddingBottom="@dimen/vertical_space3"
+        tools:visibility="gone" />
+    </LinearLayout>
+    <!--endregion-->
+  </LinearLayout>
+</androidx.core.widget.NestedScrollView>

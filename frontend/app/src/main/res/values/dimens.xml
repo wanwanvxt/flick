@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="progress_horizontal_space">100dp</dimen>
+  <dimen name="horizontal_space1">16dp</dimen>
+  <dimen name="horizontal_space2">8dp</dimen>
+  <dimen name="horizontal_space3">4dp</dimen>
+  <dimen name="vertical_space1">16dp</dimen>
+  <dimen name="vertical_space2">8dp</dimen>
+  <dimen name="vertical_space3">4dp</dimen>
+  <dimen name="drawable_space">4dp</dimen>
+  <dimen name="corner_radius1">16dp</dimen>
+  <dimen name="corner_radius2">8dp</dimen>
+  <dimen name="icon_size">24dp</dimen>
+  <dimen name="movie_card_view_width">120dp</dimen>
+  <dimen name="movie_card_view_height">180dp</dimen>
+  <dimen name="movie_card_view_space">4dp</dimen>
+  <dimen name="movie_image_min_height">400dp</dimen>
+  <dimen name="movie_image_max_height">400dp</dimen>
+  <dimen name="bottom_nav_min_height">80dp</dimen>
+</resources>
