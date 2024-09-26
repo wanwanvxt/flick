@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/main"
@@ -7,27 +7,57 @@
   android:layout_height="match_parent"
   tools:context=".views.WatchActivity">
 
-  <androidx.core.widget.NestedScrollView
+  <androidx.media3.ui.PlayerView
+    android:id="@+id/playerView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    app:controller_layout_id="@layout/movie_player_view"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical">
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/loadingContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="@id/playerView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-      <androidx.media3.ui.PlayerView
-        android:id="@+id/playerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:controller_layout_id="@layout/movie_player_view" />
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+      android:id="@+id/progressLoading"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:indeterminate="true"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:visibility="visible" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewEpisodes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/horizontal_space1"
-        android:paddingEnd="@dimen/horizontal_space1" />
-    </LinearLayout>
-  </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+  <TextView
+    android:id="@+id/labelHeadingEpisodes"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/horizontal_space1"
+    android:paddingTop="@dimen/vertical_space2"
+    android:paddingEnd="@dimen/horizontal_space1"
+    android:paddingBottom="@dimen/vertical_space2"
+    android:text="@string/heading_episodes"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/playerView" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerViewEpisodes"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/labelHeadingEpisodes" />
+</androidx.constraintlayout.widget.ConstraintLayout>

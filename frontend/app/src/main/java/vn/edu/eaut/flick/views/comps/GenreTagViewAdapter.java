@@ -1,6 +1,5 @@
 package vn.edu.eaut.flick.views.comps;
 
-import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +7,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import java.util.List;
 import vn.edu.eaut.flick.R;
 
-public class TagViewAdapter extends RecyclerView.Adapter<TagViewAdapter.ViewHolder> {
+public class GenreTagViewAdapter extends RecyclerView.Adapter<GenreTagViewAdapter.ViewHolder> {
   private final ArrayList<String> genres;
   private OnItemClickListener listener;
 
-  public TagViewAdapter(ArrayList<String> genres) {
+  public GenreTagViewAdapter(ArrayList<String> genres) {
     this.genres = genres;
   }
 
@@ -27,7 +25,7 @@ public class TagViewAdapter extends RecyclerView.Adapter<TagViewAdapter.ViewHold
   @Override
   public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext())
-      .inflate(R.layout.item_tag_view, parent, false);
+      .inflate(R.layout.item_genre_tag_view, parent, false);
     return new ViewHolder(view, listener);
   }
 

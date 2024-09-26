@@ -2,6 +2,7 @@ package vn.edu.eaut.flick.models;
 
 public class Source {
   private String url;
+  private String quality;
   private boolean isM3U8;
 
   public String getUrl() {
@@ -10,6 +11,14 @@ public class Source {
 
   public void setUrl(String url) {
     this.url = url;
+  }
+
+  public String getQuality() {
+    return quality;
+  }
+
+  public void setQuality(String quality) {
+    this.quality = quality;
   }
 
   public boolean isM3U8() {

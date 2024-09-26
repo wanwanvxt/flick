@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import java.util.ArrayList;
 import vn.edu.eaut.flick.models.MovieResult;
 
@@ -83,26 +84,40 @@ public class BookmarksDbHelper extends SQLiteOpenHelper {
 
   public void getAllMoviesAsync(Activity activity, Callback callback) {
     new Thread(() -> {
-      SQLiteDatabase db = getReadableDatabase();
+      SQLiteDatabase db = null;
+      Cursor cursor = null;
+
       ArrayList<MovieResult> result = new ArrayList<>();
       String sql = "SELECT * FROM bookmarks;";
-      Cursor cursor = db.rawQuery(sql, null);
-      if (cursor.moveToFirst()) {
-        do {
-          String id = cursor.getString(0);
-          String title = cursor.getString(1);
-          String image = cursor.getString(2);
 
-          MovieResult movieResult = new MovieResult();
-          movieResult.setId(id);
-          movieResult.setTitle(title);
-          movieResult.setImage(image);
+      try {
+        db = getReadableDatabase();
+        cursor = db.rawQuery(sql, null);
 
-          result.add(movieResult);
-        } while (cursor.moveToNext());
+        if (cursor.moveToFirst()) {
+          do {
+            String id = cursor.getString(0);
+            String title = cursor.getString(1);
+            String image = cursor.getString(2);
+
+            MovieResult movieResult = new MovieResult();
+            movieResult.setId(id);
+            movieResult.setTitle(title);
+            movieResult.setImage(image);
+
+            result.add(movieResult);
+          } while (cursor.moveToNext());
+        }
+      } catch (Exception e) {
+        Log.e("BookmarksDbHelper", e.getMessage(), e);
+      } finally {
+        if (cursor != null) {
+          cursor.close();
+        }
+        if (db != null && db.isOpen()) {
+          db.close();
+        }
       }
-      cursor.close();
-      db.close();
 
       activity.runOnUiThread(() -> callback.onResult(result));
     }).start();

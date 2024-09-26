@@ -76,6 +76,7 @@ public final class RetrofitClient {
       Response response = chain.proceed(request);
       while (!response.isSuccessful() && retryCount < maxRetries) {
         retryCount++;
+        response.close();
         response = chain.proceed(request);
       }
       return response;

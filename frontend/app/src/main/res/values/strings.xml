@@ -8,6 +8,7 @@
   <string name="heading_recent_tvshows">Top TV shows recently</string>
   <string name="heading_recent_movies">Top movies recently</string>
   <string name="heading_your_bookmarks">Your bookmarks</string>
+  <string name="heading_episodes">List of episodes:</string>
   <string name="searchbar_hint">Search for movies &amp; TV shows</string>
   <string name="bookmarks_oops1">Oops, you don\'t have any bookmarks.</string>
   <string name="bookmarks_oops2">Let\'s search more~</string>
@@ -15,4 +16,11 @@
   <string name="button_watch">Watch</string>
   <string name="button_bookmark_add">Add to bookmarks</string>
   <string name="button_bookmark_added">Remove from bookmarks</string>
+  <string name="added_bookmarks">Added to bookmarks successfully</string>
+  <string name="removed_bookmarks">Removed from bookmarks successfully</string>
+  <string name="no_episodes">No episodes available</string>
+  <string name="source_unavailable">This source unavailable</string>
+  <string name="internet_available">Internet available</string>
+  <string name="internet_lost">Lost internet connection</string>
+  <string name="internet_lost_capability">Lost internet capability</string>
 </resources>

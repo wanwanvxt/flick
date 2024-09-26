@@ -1,7 +1,8 @@
 import { FastifyInstance, RegisterOptions } from "fastify"
-import { MOVIES } from '@consumet/extensions'
+import { MOVIES, StreamingServers } from '@consumet/extensions'
 
-const movieProvider = new MOVIES.FlixHQ()
+const movieProvider = new MOVIES.MovieHdWatch()
+// const movieProvider2 = new MOVIES.FlixHQ()
 
 const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
   /** /?query={query}&page={page} */
@@ -50,7 +51,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
     }
 
     movieProvider
-      .fetchEpisodeSources(episodeID, mediaID)
+      .fetchEpisodeSources(episodeID, mediaID, StreamingServers.VidCloud)
       .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
       .catch((err) => reply.code(500).send(err))
 
@@ -112,6 +113,7 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
   })
 
   /** /genre?genre={genre}&page={page} */
+  /*
   fastify.get('/genre', async (request, reply) => {
     const genre = decodeURIComponent((request.query as { genre: string }).genre)
     const page = (request.query as { page: number }).page || 1
@@ -121,13 +123,13 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       return reply
     }
 
-    movieProvider
+    movieProvider2
       .fetchByGenre(genre, page)
       .then((data) => data ? reply.code(200).send(data) : reply.code(404).send())
       .catch((err) => reply.code(500).send(err))
 
     return reply
-  })
+  })*/
 }
 
 export default routes

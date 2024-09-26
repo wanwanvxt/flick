@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +24,7 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import vn.edu.eaut.flick.R;
 import vn.edu.eaut.flick.controllers.MovieController;
 import vn.edu.eaut.flick.helpers.BookmarksDbHelper;
 import vn.edu.eaut.flick.models.MovieInfo;
-import vn.edu.eaut.flick.views.comps.TagViewAdapter;
+import vn.edu.eaut.flick.views.comps.GenreTagViewAdapter;
 
 public class MovieInfoActivity extends AppCompatActivity {
   private CircularProgressIndicator progressFetchingInfo;
@@ -51,7 +51,7 @@ public class MovieInfoActivity extends AppCompatActivity {
   private MovieController movieController;
   private MovieInfo movieInfo;
   private ArrayList<String> movieGenres;
-  private TagViewAdapter genreTagViewAdapter;
+  private GenreTagViewAdapter genreTagViewAdapter;
   //
   private BookmarksDbHelper bookmarksDbHelper;
 
@@ -88,7 +88,7 @@ public class MovieInfoActivity extends AppCompatActivity {
     //
     movieController = new MovieController(this);
     movieGenres = new ArrayList<>();
-    genreTagViewAdapter = new TagViewAdapter(movieGenres);
+    genreTagViewAdapter = new GenreTagViewAdapter(movieGenres);
     genreTagViewAdapter.setOnItemClickListener((v, pos) -> handleClickGenreTagView(pos));
     recyclerViewMovieGenres.setAdapter(genreTagViewAdapter);
     //
@@ -133,7 +133,7 @@ public class MovieInfoActivity extends AppCompatActivity {
     Intent genreIntent = new Intent(this, SearchByGenreActivity.class);
     String clickedGenre = movieGenres.get(pos);
     genreIntent.putExtra("GENRE", clickedGenre);
-    startActivity(genreIntent);
+    //startActivity(genreIntent);
   }
 
   private void displayMovieInfo(String movieId) {
@@ -204,20 +204,24 @@ public class MovieInfoActivity extends AppCompatActivity {
     if (isAdded) {
       if (bookmarksDbHelper.removeMovie(movieInfo.getId())) {
         setButtonBookmarkIcon(false);
-        Toast.makeText(this, "Removed to bookmarks successfully", Toast.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(android.R.id.content), R.string.removed_bookmarks, Snackbar.LENGTH_SHORT).show();
       }
     } else {
       if (bookmarksDbHelper.insertMovie(movieInfo.getId(), movieInfo.getTitle(), movieInfo.getImage())) {
         setButtonBookmarkIcon(true);
-        Toast.makeText(this, "Added from bookmarks successfully", Toast.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(android.R.id.content), R.string.added_bookmarks, Snackbar.LENGTH_SHORT).show();
       }
     }
   }
 
   private void watch() {
-    Intent watchIntent = new Intent(this, WatchActivity.class);
-    watchIntent.putExtra("MOVIE_ID", movieInfo.getId());
-    watchIntent.putParcelableArrayListExtra("EPISODES", movieInfo.getEpisodes());
-//    startActivity(watchIntent);
+    if (movieInfo.getEpisodes().isEmpty()) {
+      Snackbar.make(findViewById(android.R.id.content), R.string.no_episodes, Snackbar.LENGTH_SHORT).show();
+    } else {
+      Intent watchIntent = new Intent(this, WatchActivity.class);
+      watchIntent.putExtra("MOVIE_ID", movieInfo.getId());
+      watchIntent.putParcelableArrayListExtra("EPISODES", movieInfo.getEpisodes());
+      startActivity(watchIntent);
+    }
   }
 }

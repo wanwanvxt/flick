@@ -76,7 +76,7 @@ public class BookmarksFragment extends Fragment {
     recyclerViewBookmarks.addItemDecoration(new MovieCardViewAdapter.FlexboxItemDecoration((int) getResources().getDimension(R.dimen.movie_card_view_space)));
   }
 
-  public void displayBookmarks() {
+  private void displayBookmarks() {
     progressSearching.setVisibility(View.VISIBLE);
     layoutLabelOops.setVisibility(View.GONE);
     recyclerViewBookmarks.setVisibility(View.GONE);

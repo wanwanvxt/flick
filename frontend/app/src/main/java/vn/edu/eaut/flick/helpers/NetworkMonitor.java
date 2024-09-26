@@ -1,13 +1,17 @@
 package vn.edu.eaut.flick.helpers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
-import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import com.google.android.material.snackbar.Snackbar;
+import vn.edu.eaut.flick.R;
 
 public class NetworkMonitor {
   private final ConnectivityManager connectivityManager;
@@ -23,7 +27,7 @@ public class NetworkMonitor {
         super.onAvailable(network);
         if (!isConnected) {
           isConnected = true;
-          showToast(context, "Internet available");
+          showSnackBar(context, R.string.internet_available);
         }
       }
 
@@ -32,7 +36,7 @@ public class NetworkMonitor {
         super.onLost(network);
         if (!isConnected) {
           isConnected = false;
-          showToast(context, "Lost internet connection");
+          showSnackBar(context, R.string.internet_lost);
         }
       }
 
@@ -42,10 +46,10 @@ public class NetworkMonitor {
         boolean hasInternet = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
         if (hasInternet && !isConnected) {
           isConnected = true;
-          showToast(context, "Internet available");
+          showSnackBar(context, R.string.internet_available);
         } else if (!hasInternet && isConnected) {
           isConnected = false;
-          showToast(context, "Lost internet capability");
+          showSnackBar(context, R.string.internet_lost_capability);
         }
       }
     };
@@ -62,8 +66,7 @@ public class NetworkMonitor {
     connectivityManager.unregisterNetworkCallback(networkCallback);
   }
 
-  private void showToast(Context context, String message) {
-    Toast.makeText(context, message, Toast.LENGTH_LONG)
-      .show();
+  private void showSnackBar(Context context, @StringRes int resId) {
+    Snackbar.make(((Activity) context).findViewById(android.R.id.content), resId, Snackbar.LENGTH_LONG).show();
   }
 }
