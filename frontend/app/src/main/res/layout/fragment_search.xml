@@ -67,6 +67,17 @@
           tools:visibility="visible" />
       </androidx.constraintlayout.widget.ConstraintLayout>
 
+      <TextView
+        android:id="@+id/noResultsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No movies found"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_margin="@dimen/vertical_space3"
+        android:padding="@dimen/vertical_space2" />
+
       <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSearchResult"
         android:layout_width="wrap_content"
