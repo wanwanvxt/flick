@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
+
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -28,6 +30,7 @@ public class SearchFragment extends Fragment {
   private SearchView searchView;
   private CircularProgressIndicator progressSearching;
   private RecyclerView recyclerViewSearchResult;
+  private TextView noResultsTextView;
   //
   private MovieController movieController;
   private ArrayList<MovieResult> searchMovieResults;
@@ -59,6 +62,7 @@ public class SearchFragment extends Fragment {
     searchView = view.findViewById(R.id.searchView);
     progressSearching = view.findViewById(R.id.progressSearching);
     recyclerViewSearchResult = view.findViewById(R.id.recyclerViewSearchResult);
+    noResultsTextView = view.findViewById(R.id.noResultsTextView);
     //
     movieController = new MovieController(requireContext());
     searchMovieResults = new ArrayList<>();
@@ -111,12 +115,20 @@ public class SearchFragment extends Fragment {
       currentPage = 1;
       progressSearching.setVisibility(View.VISIBLE);
       recyclerViewSearchResult.setVisibility(View.GONE);
+      noResultsTextView.setVisibility(View.GONE);
       recyclerViewSearchResult.scrollToPosition(0);
 
       movieController.search(searchQuery, 1, new MovieController.CallbackResponse<SearchResult>() {
         @Override
         public void onSuccess(SearchResult result) {
           int oldSize = searchMovieResults.size();
+
+          if (result.getResults().isEmpty()){
+            progressSearching.setVisibility(View.GONE);
+            recyclerViewSearchResult.setVisibility(View.GONE);
+            noResultsTextView.setVisibility(View.VISIBLE);
+          }
+
           searchMovieResults.clear();
           searchResultAdapter.notifyItemRangeRemoved(0, oldSize);
 
@@ -141,6 +153,12 @@ public class SearchFragment extends Fragment {
         @Override
         public void onSuccess(SearchResult result) {
           int oldSize = searchMovieResults.size();
+
+          if (result.getResults().isEmpty()){
+            isFetchingNextPage = false;
+            return;
+          }
+
           searchMovieResults.addAll(result.getResults());
           hasNextPage = result.hasNextPage();
           isFetchingNextPage = false;
