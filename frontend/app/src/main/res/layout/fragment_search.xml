@@ -71,7 +71,7 @@
         android:id="@+id/noResultsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No movies found"
+        android:text="@string/no_movies_found"
         android:textSize="16sp"
         android:gravity="center"
         android:visibility="gone"
