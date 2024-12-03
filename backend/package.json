@@ -11,16 +11,16 @@
     "start": "tsx ./src/main.ts"
   },
   "dependencies": {
-    "@consumet/extensions": "^1.8.0",
-    "@types/node": "^22.7.2",
-    "dotenv": "^16.4.5",
+    "@consumet/extensions": "^1.8.1",
+    "@types/node": "^22.10.1",
+    "dotenv": "^16.4.6",
     "fastify": "^4.28.1",
-    "tsx": "^4.19.1",
-    "typescript": "^5.6.2"
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^2.8.0",
-    "eslint": "^9.11.1"
+    "@stylistic/eslint-plugin": "^2.11.0",
+    "eslint": "^9.16.0"
   },
   "packageManager": "pnpm@9.8.0"
 }

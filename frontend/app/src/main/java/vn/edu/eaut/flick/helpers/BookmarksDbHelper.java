@@ -41,6 +41,10 @@ public class BookmarksDbHelper extends SQLiteOpenHelper {
     db.close();
     return result != -1;
   }
+  
+  public boolean insertMovie(MovieResult movie) {
+    return insertMovie(movie.getId(), movie.getTitle(), movie.getImage());
+  }
 
   public boolean removeMovie(String id) {
     SQLiteDatabase db = getWritableDatabase();

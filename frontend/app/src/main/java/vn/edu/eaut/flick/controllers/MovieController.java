@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.edu.eaut.flick.helpers.BookmarksDbHelper;
 import vn.edu.eaut.flick.models.MovieInfo;
 import vn.edu.eaut.flick.models.MovieResult;
 import vn.edu.eaut.flick.models.SearchResult;
@@ -16,6 +17,7 @@ import vn.edu.eaut.flick.services.RetrofitClient;
 
 public class MovieController {
   private final MovieService movieService;
+  private final BookmarksDbHelper dbHelper;
 
   private <T> void handleResponse(Call<T> call, CallbackResponse<T> callback) {
     call.enqueue(new Callback<T>() {
@@ -43,6 +45,7 @@ public class MovieController {
 
   public MovieController(Context context) {
     movieService = RetrofitClient.getRetrofit(context).create(MovieService.class);
+	  dbHelper = new BookmarksDbHelper(context);
   }
 
   public void search(String query, int page, CallbackResponse<SearchResult> callback) {
@@ -67,5 +70,21 @@ public class MovieController {
 
   public void searchByGenre(String genre, int page, CallbackResponse<SearchResult> callback) {
     handleResponse(movieService.searchByGenre(genre, page), callback);
+  }
+
+  public boolean insertBookmark(MovieResult movie) {
+	return dbHelper.insertMovie(movie);
+  }
+
+  public boolean removeBookmark(String id) {
+	return dbHelper.removeMovie(id);
+  }
+
+  public boolean existBookmark(String id) {
+	return dbHelper.existMovie(id);
+  }
+
+  public ArrayList<MovieResult> getAllBookmarks() {
+	return dbHelper.getAllMovies();
   }
 }
